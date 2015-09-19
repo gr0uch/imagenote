@@ -1,0 +1,92 @@
+<% if (images.length) { %>
+  <section class="collection">
+    <% var lastDate, lastViews, counter = 0 %>
+    <% images.forEach((image, index) => { %>
+      <% if (index === images.length - 1) {
+        if (query.sort === 'views') { lastViews = image.viewCount }
+        else { lastDate = image.uploadDate.getTime() }
+      } %>
+      <div class="card">
+        <img
+          width="<%= image.width %>"
+          height="<%= image.height %>"
+          src="data:image/gif;base64,<%= image.blankData.toString('base64') %>"
+          alt="">
+        <div class="overlay">
+          <a href="<%= image.image %>">
+            <img
+              width="<%= image.width %>"
+              height="<%= image.height %>"
+              alt="<%= (image.name ? (image.name + ' - ') : '') + (image.description || '') %>"
+              title="<%= image.description || '' %>"
+              src="<%= image.thumbnailUrl %>">
+          </a>
+          <% if (isAdmin) { %>
+            <form method="post" action="<%= `images/${encodeURIComponent(image.id)}/delete` %>">
+              <button class="delete">×</button>
+            </form>
+          <% } %>
+        </div>
+        <div class="top-line">
+          <input type="checkbox" id="<%= `edit-${counter}` %>">
+          <label for="<%= `edit-${counter}` %>">edit</label>
+          <% counter++ %>
+          <span class="view-count">
+            <%= `${numeral(image.viewCount).format('0,0')} view${image.viewCount !== 1 ? 's' : ''}` %>
+          </span>
+          <time datetime="<%= moment(image.uploadDate).toISOString() %>">
+            <span title="<%= moment(image.uploadDate).format('MMMM Do, YYYY') %>">
+              <%= moment(image.uploadDate).fromNow() %>
+            </span>
+          </time>
+          <form method="post"
+            enctype="multipart/form-data"
+            action="<%= `/images/${encodeURIComponent(image.id)}/edit` %>">
+            <input type="text" name="about" value="<%= image.about.join(', ') %>"
+              placeholder="Comma-separated IDs...">
+            <input type="text" name="keywords" value="<%= image.keywords.join(', ') %>"
+              placeholder="Comma-separated tags...">
+            <input type="text" name="description" value="<%= image.description || '' %>"
+              placeholder="Description...">
+            <input type="hidden" name="id" value="<%= image.id %>">
+            <button>Edit</button>
+          </form>
+        </div>
+        <% if (image.keywords.length || image.about.length) { %>
+          <p class="tags">
+            <% image.about.forEach(id => { %>
+              <a class="tag id" href="?<%= qs.stringify({ id }) %>">
+                <%= id %>
+              </a>
+            <% }) %>
+            <% image.keywords.forEach(keyword => { %>
+              <a class="tag" href="?<%= qs.stringify({ tag: keyword }) %>">
+                <%= keyword %>
+              </a>
+            <% }) %>
+          </p>
+        <% } %>
+      </div>
+    <% }) %>
+  </section>
+  <nav>
+    <% if (previousDate || previousViews) { %>
+      <a class="button dark" href="?<%= qs.stringify(Object.assign({},
+        query, previousDate ? { before: previousDate } : { views: previousViews + 1 })) %>">
+        <span class="arrow left">◀</span>Previous
+      </a>
+    <% } %>
+    <% if (images.length >= settings.perPage &&
+    (lastDate ? query.before !== lastDate : query.views !== lastViews)) { %>
+      <a class="button dark" href="?<%= qs.stringify(Object.assign({},
+        query, lastDate ? { before: lastDate - 1 } : { views: lastViews })) %>">
+          Next<span class="arrow right">▶</span>
+        </a>
+    <% } %>
+  </nav>
+<% } else { %>
+  <%- this.error({ error: {
+    name: 'No matches',
+    message: 'There were no matches for your query.'
+  } }) %>
+<% } %>

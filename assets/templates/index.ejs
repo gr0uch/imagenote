@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= (typeof title !== 'undefined' ? title + ' | ' : '') + settings.name %></title>
+    <link rel="stylesheet" href="<%= root %>stylesheet">
+    <link rel="icon" type="image/x-icon" href="<%= root %>favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <div id="background"></div>
+    <% if (!Object.keys(flags).length && !request.error) { %>
+      <%- this.header({ settings, root, query: request.query }) %>
+    <% } %>
+    <main>
+      <% if (typeof images !== 'undefined') { %>
+        <%- this.collection({
+          settings, images, qs, moment, numeral,
+          query: request.query,
+          isAdmin: request.isAdmin,
+          previousDate: request.previousDate,
+          previousViews: request.previousViews,
+          error: request.error
+        }) %>
+      <% } %>
+      <% if (flags.isUpload) { %>
+        <%- this.upload({ settings, root, error: request.error }) %>
+      <% } %>
+      <% if (request.error && !Object.keys(flags).length) { %>
+        <%- this.error({ error: request.error }) %>
+      <% } %>
+    </main>
+    <script defer src="<%= root %>script"></script>
+  </body>
+</html>

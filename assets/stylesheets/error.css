@@ -1,0 +1,30 @@
+@custom-selector :--error section.error;
+
+:--error > div {
+  padding: calc(var(--line-height) * 1);
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+:--error {
+  height: 100%;
+  text-align: center;
+}
+
+:--error:before {
+  content: ' ';
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+:--error h1 {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+:--error p {
+  margin-top: calc(var(--line-height) * 1);
+  margin-bottom: 0;
+}

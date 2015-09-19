@@ -1,0 +1,191 @@
+@custom-selector :--collection main > section.collection;
+
+:--collection {
+  column-count: 5;
+  column-gap: calc(var(--card-gap));
+  max-width: calc(var(--max-width) + var(--page-gap) * 2);
+  margin: 0 auto;
+  padding: calc(var(--line-height) * 5 / 2 + var(--page-gap)) var(--page-gap) 0;
+}
+
+:--collection .card {
+  background-color: var(--color-input);
+  display: inline-block;
+  margin-bottom: calc(var(--card-gap) - 0.25em);
+  padding: 0 0 10px;
+  width: 100%;
+  box-shadow: 0 1px 0 var(--color-border);
+  position: relative;
+  border-radius: var(--border-radius);
+}
+
+:--collection .card p time {
+  color: var(--color-body);
+}
+
+:--collection .card p {
+  color: var(--color-alt);
+  padding: 0 var(--card-padding);
+  margin: 0;
+  font-size: calc(1em * 3 / 4);
+  line-height: var(--line-height);
+}
+
+:--collection .card p:after {
+  clear: both;
+  content: ' ';
+  display: block;
+}
+
+:--collection .card .tag.id {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+:--collection .card .tag.id:before {
+  content: '@';
+}
+
+:--collection .card .tag:before {
+  content: '#';
+  color: var(--color-light);
+}
+
+:--collection .card .tag:after {
+  content: ', ';
+  margin-right: 0.2em;
+}
+
+:--collection .card input[type="checkbox"],
+:--collection .card .tag:last-of-type:after {
+  display: none;
+}
+
+:--collection .card label,
+:--collection .card .view-count {
+  float: right;
+  color: var(--color-light);
+}
+
+:--collection .card label {
+  cursor: pointer;
+}
+
+:--collection .card label:before {
+  content: '⁄';
+  margin: 0 0.6em;
+}
+
+:--collection .card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--color-light);
+  border-radius: var(--border-radius);
+  user-select: none;
+  transition: opacity var(--speed-slow) ease;
+}
+
+:--collection .card[data-active] img {
+  opacity: 1;
+}
+
+:--collection .card .overlay img,
+:--collection .card .overlay a,
+:--collection .card .overlay {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+:--collection .card .overlay form {
+  opacity: 0;
+  position: absolute;
+  top: calc(var(--card-padding) * 1);
+  right: calc(var(--card-padding) * 1);
+  transition: opacity var(--speed-fast) ease;
+}
+
+:--collection .card:hover .overlay form {
+  opacity: 1;
+}
+
+:--collection .card .top-line {
+  position: relative;
+  padding: 7px var(--card-padding) 0;
+  color: var(--color-alt);
+  font-size: calc(1em * 3 / 4);
+  line-height: var(--line-height);
+}
+
+:--collection .card .top-line form {
+  position: absolute;
+  width: 20em;
+  top: calc(var(--line-height) + 16px);
+  right: 0;
+  background-color: var(--color-dark);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 0 var(--color-shade);
+  z-index: 500;
+  display: none;
+  padding: var(--card-padding);
+}
+
+:--collection .card .top-line form:after {
+  bottom: 100%;
+  right: 1.35em;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-bottom-color: var(--color-dark);
+  border-width: 8px;
+  margin-left: -8px;
+}
+
+:--collection .card .top-line input[type="text"] {
+  color: var(--color-bright);
+  background-color: var(--color-border);
+  border-radius: var(--border-radius);
+  border: none;
+  font-size: inherit;
+  display: block;
+  width: 100%;
+  margin-bottom: var(--card-padding);
+  padding: 0 var(--card-padding);
+  height: calc(var(--line-height) + 18px);
+}
+
+:--collection .card .top-line input[type="text"]:focus {
+  outline: none;
+}
+
+/* Vendor prefixes suck! */
+:--collection .card .top-line input[type="text"]::-webkit-input-placeholder { opacity: 1; color: var(--color-light); }
+:--collection .card .top-line input[type="text"]:-moz-placeholder { opacity: 1; color: var(--color-light); }
+:--collection .card .top-line input[type="text"]::-moz-placeholder { opacity: 1; color: var(--color-light); }
+:--collection .card .top-line input[type="text"]:-ms-input-placeholder { opacity: 1; color: var(--color-light); }
+:--collection .card .top-line input[type="text"]:placeholder { opacity: 1; color: var(--color-light); }
+
+:--collection .card .top-line input[type="checkbox"]:checked ~ label {
+  color: var(--color-bright);
+}
+
+:--collection .card .top-line input[type="checkbox"]:checked ~ label:before {
+  color: var(--color-light);
+}
+
+:--collection .card .top-line input[type="checkbox"]:checked ~ form {
+  display: block;
+}
+
+:--collection .card .top-line button {
+  padding: 6px var(--card-padding) 4px;
+  width: 100%;
+  font-weight: bold;
+}

@@ -1,0 +1,31 @@
+@custom-selector :--zoom #zoom;
+
+:--zoom {
+  position: fixed;
+  z-index: 9000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1.25);
+  transition: opacity var(--speed-slow) ease,
+    transform var(--speed-fast) ease;
+}
+
+:--zoom img {
+  position: absolute;
+  top: calc(var(--line-height) * 5 / 4);
+  left: calc(var(--line-height) * 5 / 4);
+  width: calc(100% - var(--line-height) * 5 / 2);
+  height: calc(100% - var(--line-height) * 5 / 2);
+  display: block;
+  object-fit: contain;
+}
+
+:--zoom[data-active] {
+  pointer-events: auto;
+  transform: scale(1);
+  opacity: 1;
+}

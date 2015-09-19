@@ -1,0 +1,28 @@
+# Site name.
+name: "ImageNote"
+
+# Database connection URL.
+databaseUrl: "postgres://postgres@localhost:5432/imagenote"
+
+# Hidden route accessible at `/:secret`, giving admin privileges.
+secret: "topsecret"
+
+# What port number should the application listen on.
+port: 8890
+
+# How many images to show per page.
+perPage: 30
+
+# Maximum width of thumbnail image.
+thumbnailWidth: 400
+
+# Minimum dimensions of image upload.
+minimumWidth: 100
+minimumHeight: 100
+
+# Maximum file size, in MB.
+maxFileSize: 10
+
+# Maximum string lengths.
+maxDescriptionLength: 200
+maxTagLength: 40

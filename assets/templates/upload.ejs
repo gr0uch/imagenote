@@ -1,0 +1,40 @@
+<section class="upload">
+  <div>
+    <h3><a href="<%= root %>"><%= settings.name %></a></h3>
+    <form method="post" enctype="multipart/form-data">
+      <% if (error) { %>
+        <div class="error">
+          <%- error.message || error.name %>
+        </div>
+      <% } %>
+      <fieldset>
+        <legend>File Upload</legend>
+        <div class="box">
+          <label class="file-upload">
+            <span>Images</span>
+            <input type="file" name="uploadTarget" accept="image/*" multiple required>
+          </label>
+          <label>
+            <span>Identifiers</span>
+            <input type="text" name="about" placeholder="Comma-separated IDs...">
+          </label>
+          <label>
+            <span>Tags</span>
+            <input type="text" name="keywords" placeholder="Comma-separated tags...">
+          </label>
+          <!--
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" placeholder="Name">
+          </label>
+          -->
+          <label>
+            <span>Description</span>
+            <input type="text" name="description" placeholder="Description...">
+          </label>
+        </div>
+      </fieldset>
+      <input type="submit" value="Upload">
+    </form>
+  </div>
+</section>

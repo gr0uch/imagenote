@@ -1,0 +1,37 @@
+@custom-selector :--button button, .button;
+
+:--button {
+  background-color: var(--color-link);
+  color: #fff;
+  border-radius: var(--border-radius);
+  padding: 0.4em 1em;
+  transition: opacity var(--speed-fast) ease;
+  box-shadow: inset 0 -2px 0 var(--color-shadow);
+  border: none;
+  user-select: none;
+}
+
+:--button.grey {
+  background-color: var(--color-border);
+  color: var(--color-body);
+  box-shadow: none;
+}
+
+:--button.dark {
+  background-color: var(--color-input);
+  color: var(--color-body);
+  box-shadow: 0 1px 0 var(--color-border);
+}
+
+:--button.delete {
+  background-color: var(--color-delete);
+}
+
+:--button:focus,
+:--button:hover {
+  opacity: 0.8;
+}
+
+:--button:active {
+  box-shadow: none;
+}

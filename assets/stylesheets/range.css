@@ -1,0 +1,93 @@
+input[type="range"] {
+  background: transparent;
+  -webkit-appearance: none;
+  border: 1px transparent solid;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 5px;
+  background: var(--color-shade);
+  border: none;
+  border-radius: 3px;
+  position: relative;
+  top: -6px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--color-bg-top);
+  margin-top: -6px;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: var(--color-shadow);
+}
+
+input[type=range]::-moz-range-track {
+  height: 5px;
+  background: var(--color-shade);
+  border: none;
+  border-radius: 3px;
+}
+
+input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--color-bg-top);
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+  outline: 1px transparent solid;
+  outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+  height: 5px;
+
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+
+  /*remove default tick marks*/
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: var(--color-shade);
+  border-radius: 10px;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: var(--color-shade);
+  border-radius: 10px;
+}
+
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--color-bg-top);
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: var(--color-shade);
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: var(--color-shadow);
+}

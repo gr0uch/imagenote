@@ -1,0 +1,110 @@
+<header>
+  <section>
+    <a href="<%= root %>upload" class="button upload grey"><span>+</span>Upload</a>
+    <h1><a href="<%= root %>"><%= settings.name %></a></h1>
+    <div class="dropdown">
+      <input type="checkbox" id="filter-id">
+      <label for="filter-id">
+        <% var ids = (query.id || '').split(',')
+          .map(x => x.trim().toLowerCase()).join(', ') %>
+        <%- query.id ? `ID${query.id.length > 1 ? 's' : ''}: ` +
+          `<span class="ids">${ids}</span>` : 'ID' %>
+      </label>
+      <span class="arrow"></span>
+      <form class="menu">
+        <% if (query.tag) { %>
+          <input type="hidden" name="tag" value="<%= query.tag %>">
+        <% } %>
+        <% if (query.sort === 'views') { %>
+          <input type="hidden" name="sort" value="views">
+        <% } %>
+        <% if (query.size) { %>
+          <input type="hidden" name="size" value="<%= query.size %>">
+        <% } %>
+        <input type="text" name="id" value="<%= ids %>"
+          placeholder="Comma-separated IDs...">
+        <button>Filter</button>
+      </form>
+    </div>
+    <div class="dropdown">
+      <input type="checkbox" id="filter-tag">
+      <label for="filter-tag">
+        <% var tags = (query.tag || '').split(',')
+          .map(x => x.trim().toLowerCase()).join(', ') %>
+        <%= query.tag ? `Tag${query.tag.length > 1 ? 's' : ''}: ` +
+          tags : 'Tag' %>
+      </label>
+      <span class="arrow"></span>
+      <form class="menu">
+        <% if (query.id) { %>
+          <input type="hidden" name="id" value="<%= query.id %>">
+        <% } %>
+        <% if (query.sort === 'views') { %>
+          <input type="hidden" name="sort" value="views">
+        <% } %>
+        <% if (query.size) { %>
+          <input type="hidden" name="size" value="<%= query.size %>">
+        <% } %>
+        <input type="text" name="tag" value="<%= tags %>"
+          placeholder="Comma-separated tags...">
+        <button>Filter</button>
+      </form>
+    </div>
+    <div class="dropdown">
+      <input type="checkbox" id="filter-sort">
+      <label for="filter-sort">
+        <%= `Sort: ${query.sort === 'views' ? 'views' : 'date'}` %>
+      </label>
+      <span class="arrow"></span>
+      <form class="menu">
+        <% if (query.id) { %>
+          <input type="hidden" name="id" value="<%= query.id %>">
+        <% } %>
+        <% if (query.tag) { %>
+          <input type="hidden" name="tag" value="<%= query.tag %>">
+        <% } %>
+        <% if (query.size) { %>
+          <input type="hidden" name="size" value="<%= query.size %>">
+        <% } %>
+        <label class="radio">
+          <% if (query.sort !== 'views') { %>
+            <input type="radio" name="sort" value="" checked>
+          <% } else { %>
+            <input type="radio" name="sort" value="">
+          <% } %>
+          <span>Upload date</span>
+        </label>
+        <label class="radio">
+          <% if (query.sort === 'views') { %>
+            <input type="radio" name="sort" value="views" checked>
+          <% } else { %>
+            <input type="radio" name="sort" value="views">
+          <% } %>
+          <span>View count</span>
+        </label>
+        <button>Sort</button>
+      </form>
+    </div>
+    <div class="dropdown">
+      <input type="checkbox" id="filter-size">
+      <label for="filter-size">
+        <%= query.size && query.size !== '0' ? `Size: >${query.size} MP` : 'Size' %>
+      </label>
+      <span class="arrow"></span>
+      <form class="menu">
+        <% if (query.id) { %>
+          <input type="hidden" name="id" value="<%= query.id %>">
+        <% } %>
+        <% if (query.sort === 'views') { %>
+          <input type="hidden" name="sort" value="views">
+        <% } %>
+        <% if (query.tag) { %>
+          <input type="hidden" name="tag" value="<%= query.tag %>">
+        <% } %>
+        <input type="range" name="size" min="0" max="1.2" step="0.1"
+          value="<%= query.size ? query.size : 0.3 %>">
+        <button>Filter</button>
+      </form>
+    </div>
+  </section>
+</header>

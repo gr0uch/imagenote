@@ -1,0 +1,79 @@
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+@custom-selector :--text-block p, ol, ul, pre, blockquote;
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg-top);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  color: var(--color-body);
+  line-height: var(--line-height);
+}
+
+
+body[data-active] > header:not([data-active]) {
+  opacity: 0.5;
+}
+
+
+body[data-active] .card img {
+  opacity: 0.25;
+}
+
+body[data-active] .card .overlay a {
+  pointer-events: none;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--color-shade);
+}
+
+:--heading {
+  font-size: 1em;
+  margin: 0 0 var(--line-height);
+}
+
+:--text-block {
+  margin: 0 0 var(--line-height);
+}
+
+main {
+  height: 100%;
+  position: relative;
+  z-index: 20;
+}
+
+main > nav {
+  text-align: center;
+  padding: var(--line-height) 0 var(--page-gap);
+}
+
+main > nav .button {
+  margin: 0 0.2em;
+}
+
+main > nav .button span {
+  color: var(--color-alt);
+}
+
+main > nav .button span.left { margin-right: 0.4em; }
+main > nav .button span.right { margin-left: 0.4em; }
+
+#background {
+  background: linear-gradient(to bottom,
+    var(--color-bg-top), var(--color-bg-bottom));
+  position: fixed;
+  z-index: -1;
+  width: 100%;
+  height: calc(100% - var(--line-height) * 5 / 2);
+  left: 0;
+  top: calc(var(--line-height) * 5 / 2);
+}
