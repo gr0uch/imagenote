@@ -10,10 +10,10 @@ var checkboxes = document.querySelectorAll(
   'body > header input[type="checkbox"], .top-line input[type="checkbox"]')
 var dropdowns = document.querySelectorAll(
   '.dropdown, .top-line form')
-var tagInput = document.querySelector(
-  '#filter-tag ~ form input[name="tag"]')
-var tagLabel = document.querySelector(
-  'label[for="filter-tag"]')
+var focusInputs = document.querySelectorAll(
+  '#filter-tag ~ form input[name="tag"], #filter-id ~ form input[name="id"]')
+var focusLabels = document.querySelectorAll(
+  'label[for="filter-tag"], label[for="filter-id"]')
 
 // Uncheck checkboxes.
 Array.prototype.forEach.call(checkboxes, function (checkbox) {
@@ -56,9 +56,11 @@ Array.prototype.forEach.call(checkboxLabels, function (element) {
 window.addEventListener('click', close)
 
 // Autofocus input.
-if (tagLabel)
-  tagLabel.addEventListener('click', function () {
-    setTimeout(function () { tagInput.focus() }, 0)
+if (focusLabels.length)
+  Array.prototype.forEach.call(focusLabels, function (element, i) {
+    element.addEventListener('click', function () {
+      setTimeout(function () { focusInputs[i].focus() }, 0)
+    })
   })
 
 // Edit label autofocus.

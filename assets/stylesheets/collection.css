@@ -135,7 +135,7 @@
 
 :--collection .card .top-line form:after {
   bottom: 100%;
-  right: 1.35em;
+  right: 0.9em;
   border: solid transparent;
   content: " ";
   height: 0;

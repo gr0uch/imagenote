@@ -29,10 +29,12 @@
         </div>
         <div class="top-line">
           <input type="checkbox" id="<%= `edit-${counter}` %>">
-          <label for="<%= `edit-${counter}` %>">edit</label>
+          <label for="<%= `edit-${counter}` %>" title="Edit">✎</label>
           <% counter++ %>
           <span class="view-count">
-            <%= `${numeral(image.viewCount).format('0,0')} view${image.viewCount !== 1 ? 's' : ''}` %>
+            <% var viewCount = numeral(image.viewCount).format('0,0') %>
+            <%- `<span title="${viewCount} view${image.viewCount !== 1 ? 's' : ''}">
+              ⎆ ${viewCount}</span>` %>
           </span>
           <time datetime="<%= moment(image.uploadDate).toISOString() %>">
             <span title="<%= moment(image.uploadDate).format('MMMM Do, YYYY') %>">
