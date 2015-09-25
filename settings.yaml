@@ -1,5 +1,6 @@
-# Site name.
+# Site meta information.
 name: "ImageNote"
+description: "Anonymous image gallery."
 
 # Database connection URL.
 databaseUrl: "postgres://postgres@localhost:5432/imagenote"
@@ -25,4 +26,5 @@ maxFileSize: 10
 
 # Maximum string lengths.
 maxDescriptionLength: 200
+maxCommentLength: 300
 maxTagLength: 40

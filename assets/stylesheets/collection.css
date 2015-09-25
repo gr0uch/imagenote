@@ -120,7 +120,7 @@
   line-height: var(--line-height);
 }
 
-:--collection .card .top-line form {
+:--collection .card .top-line .popup {
   position: absolute;
   width: 20em;
   top: calc(var(--line-height) + 16px);
@@ -133,7 +133,7 @@
   padding: var(--card-padding);
 }
 
-:--collection .card .top-line form:after {
+:--collection .card .top-line .popup:after {
   bottom: 100%;
   right: 0.9em;
   border: solid transparent;
@@ -146,6 +146,10 @@
   border-bottom-color: var(--color-dark);
   border-width: 8px;
   margin-left: -8px;
+}
+
+:--collection .card .top-line .popup.comment:after {
+  right: 3.4em;
 }
 
 :--collection .card .top-line input[type="text"] {
@@ -172,20 +176,53 @@
 :--collection .card .top-line input[type="text"]:-ms-input-placeholder { opacity: 1; color: var(--color-light); }
 :--collection .card .top-line input[type="text"]:placeholder { opacity: 1; color: var(--color-light); }
 
-:--collection .card .top-line input[type="checkbox"]:checked ~ label {
+:--collection .card .top-line input.edit:checked ~ label.edit,
+:--collection .card .top-line input.comment:checked ~ label.comment {
   color: var(--color-bright);
 }
 
-:--collection .card .top-line input[type="checkbox"]:checked ~ label:before {
+:--collection .card .top-line input.edit:checked ~ label.edit:before,
+:--collection .card .top-line input.comment:checked ~ label.comment:before {
   color: var(--color-light);
 }
 
-:--collection .card .top-line input[type="checkbox"]:checked ~ form {
+:--collection .card .top-line input.edit:checked ~ .popup.edit,
+:--collection .card .top-line input.comment:checked ~ .popup.comment {
   display: block;
 }
 
 :--collection .card .top-line button {
-  padding: 6px var(--card-padding) 4px;
+  padding: 9px var(--card-padding) 7px;
   width: 100%;
   font-weight: bold;
+}
+
+:--collection .comments {
+  margin: -3px 0 var(--card-padding);
+  padding: 0;
+  list-style-type: none;
+}
+
+:--collection .comments li {
+  padding: 9px 0 12px;
+  border-bottom: 1px var(--color-border) solid;
+}
+
+:--collection .comments li:first-of-type {
+  padding-top: 0;
+}
+
+:--collection .comments time {
+  color: var(--color-light);
+}
+
+:--collection .comments form {
+  display: inline;
+  float: right;
+}
+
+:--collection .comments button {
+  width: auto !important;
+  padding: 0 4px !important;
+  margin: 0 0 -0.25em 0.5em;
 }

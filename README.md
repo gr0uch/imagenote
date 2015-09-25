@@ -1,6 +1,6 @@
 # ImageNote
 
-Web-based image gallery application. Features anonymous image uploading, tagging, and identifying. Works in modern browsers, JavaScript optional! Useful for paranoid and darknet users.
+Web-based image gallery application. Features anonymous image uploading, commenting, tagging, and identifying. Works in modern browsers, JavaScript optional! Useful for paranoid and darknet users.
 
 ![Screenshot](https://raw.githubusercontent.com/0x8890/imagenote/master/assets/images/screenshot.png)
 

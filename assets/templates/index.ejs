@@ -2,10 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><%= (typeof title !== 'undefined' ? title + ' | ' : '') + settings.name %></title>
+    <% if (request.error) title = request.error.name %>
+    <title><%= (title ? title + ' | ' : '') + settings.name %></title>
     <link rel="stylesheet" href="<%= root %>stylesheet">
     <link rel="icon" type="image/x-icon" href="<%= root %>favicon.ico">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <% if (!Object.keys(flags).length && !request.error) { %>
+      <meta name="description" content="<%= settings.description %>">
+    <% } %>
+    <% if (request.query.tag) { %>
+      <meta name="keywords" content="<%= request.query.tag.split(', ') %>">
+    <% } %>
   </head>
   <body>
     <div id="background"></div>
@@ -15,7 +22,7 @@
     <main>
       <% if (typeof images !== 'undefined') { %>
         <%- this.collection({
-          settings, images, qs, moment, numeral,
+          settings, images, qs, moment, numeral, include,
           query: request.query,
           isAdmin: request.isAdmin,
           previousDate: request.previousDate,

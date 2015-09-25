@@ -41,6 +41,7 @@
 :--dropdown input[type="checkbox"]:checked ~ label {
   background: linear-gradient(to bottom, var(--color-alt), var(--color-body));
   color: var(--color-medium);
+  cursor: default;
 }
 
 :--dropdown input[type="checkbox"]:checked ~ .arrow:before {

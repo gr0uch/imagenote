@@ -48,7 +48,9 @@ Array.prototype.forEach.call(dropdowns, stop)
 Array.prototype.forEach.call(checkboxLabels, function (element) {
   element.addEventListener('mouseover', function () {
     if (body.hasAttribute(close.dataActive) &&
-    !element.parentNode.children[0].checked) element.click()
+      header.hasAttribute(close.dataActive) &&
+      !element.parentNode.firstChild.checked && !element.className)
+      element.click()
   })
 })
 
@@ -66,8 +68,10 @@ if (focusLabels.length)
 // Edit label autofocus.
 Array.prototype.forEach.call(editLabels, function (element) {
   element.addEventListener('click', function () {
+    const className = element.className
     setTimeout(function () {
-      element.parentNode.lastChild.firstChild.focus()
+      element.parentNode.querySelector('.popup.' + className +
+        ' input:first-of-type').focus()
     }, 0)
   })
 })
