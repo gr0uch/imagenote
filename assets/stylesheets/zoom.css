@@ -22,6 +22,7 @@
   height: calc(100% - var(--line-height) * 5 / 2);
   display: block;
   object-fit: contain;
+  user-select: none;
 }
 
 :--zoom[data-active] {

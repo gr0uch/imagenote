@@ -53,7 +53,8 @@
     <div class="dropdown">
       <input type="checkbox" id="filter-sort">
       <label for="filter-sort">
-        <%= `Sort: ${query.sort === 'views' ? 'views' : 'date'}` %>
+        <%= `Sort: ${query.sort === 'views' ? 'views' :
+          query.sort === 'comments' ? 'comments' : 'date'}` %>
       </label>
       <span class="arrow"></span>
       <form class="menu">
@@ -67,7 +68,7 @@
           <input type="hidden" name="size" value="<%= query.size %>">
         <% } %>
         <label class="radio">
-          <% if (query.sort !== 'views') { %>
+          <% if (query.sort !== 'views' && query.sort !== 'comments') { %>
             <input type="radio" name="sort" value="" checked>
           <% } else { %>
             <input type="radio" name="sort" value="">
@@ -81,6 +82,14 @@
             <input type="radio" name="sort" value="views">
           <% } %>
           <span>View count</span>
+        </label>
+        <label class="radio">
+          <% if (query.sort === 'comments') { %>
+            <input type="radio" name="sort" value="comments" checked>
+          <% } else { %>
+            <input type="radio" name="sort" value="comments">
+          <% } %>
+          <span>Comment count</span>
         </label>
         <button>Sort</button>
       </form>

@@ -9,7 +9,7 @@ var editLabels =  document.querySelectorAll('.top-line label')
 var checkboxes = document.querySelectorAll(
   'body > header input[type="checkbox"], .top-line input[type="checkbox"]')
 var dropdowns = document.querySelectorAll(
-  '.dropdown, .top-line form')
+  '.dropdown, .top-line .popup')
 var focusInputs = document.querySelectorAll(
   '#filter-tag ~ form input[name="tag"], #filter-id ~ form input[name="id"]')
 var focusLabels = document.querySelectorAll(

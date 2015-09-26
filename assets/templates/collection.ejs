@@ -1,9 +1,10 @@
 <% if (images.length) { %>
   <section class="collection">
-    <% var lastDate, lastViews, counter = 0 %>
+    <% var lastDate, lastViews, lastComments, counter = 0 %>
     <% images.forEach((image, index) => { %>
       <% if (index === images.length - 1) {
         if (query.sort === 'views') { lastViews = image.viewCount }
+        else if (query.sort === 'comments') { lastComments = image.comment ? image.comment.length : 0 }
         else { lastDate = image.uploadDate.getTime() }
       } %>
       <div class="card">
@@ -102,16 +103,22 @@
     <% }) %>
   </section>
   <nav>
-    <% if (previousDate || previousViews) { %>
-      <a class="button dark" href="?<%= qs.stringify(Object.assign({},
-        query, previousDate ? { before: previousDate } : { views: previousViews + 1 })) %>">
+    <% if (previousDate || previousViews || previousComments) { %>
+      <a class="button dark" href="?<%= qs.stringify(Object.assign({}, query,
+        previousDate !== void 0 ? { before: previousDate } : null,
+        previousViews !== void 0 ? { views: previousViews + 1 } : null,
+        previousComments !== void 0 ? { comments: previousComments + 1 } : null)) %>">
         <span class="arrow left">◀</span>Previous
       </a>
     <% } %>
     <% if (images.length >= settings.perPage &&
-    (lastDate ? query.before !== lastDate : query.views !== lastViews)) { %>
-      <a class="button dark" href="?<%= qs.stringify(Object.assign({},
-        query, lastDate ? { before: lastDate - 1 } : { views: lastViews })) %>">
+      (lastDate !== void 0 ? query.before !== lastDate : true) &&
+      (lastViews !== void 0 ? query.views !== lastViews : true) &&
+      (lastComments !== void 0 ? query.comments !== lastComments : true)) { %>
+      <a class="button dark" href="?<%= qs.stringify(Object.assign({}, query,
+        lastDate !== void 0 ? { before: lastDate - 1 } : null,
+        lastViews !== void 0 ? { views: lastViews } : null,
+        lastComments !== void 0 ? { comments: lastComments } : null)) %>">
           Next<span class="arrow right">▶</span>
         </a>
     <% } %>
