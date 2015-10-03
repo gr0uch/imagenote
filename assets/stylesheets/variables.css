@@ -31,8 +31,8 @@
   --size-body: 16px;
   --line-height: calc(1em * 8 / 5);
   --border-radius: calc(1em * 3 / 10);
-  --card-padding: 14px;
-  --card-gap: calc(var(--line-height) * 2);
+  --card-padding: 5px;
+  --card-gap: calc(var(--line-height) * 7 / 4);
   --page-gap: calc(var(--line-height) * 5 / 2);
   --speed-slow: 0.30s;
   --speed-fast: 0.15s;
