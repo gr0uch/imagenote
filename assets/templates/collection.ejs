@@ -103,12 +103,12 @@
     <% }) %>
   </section>
   <nav>
-    <% if (previousDate || previousViews || previousComments) { %>
+    <% if (previousCount) { %>
       <a class="button dark" href="?<%= qs.stringify(Object.assign({}, query,
         previousDate !== void 0 ? { before: previousDate } : null,
         previousViews !== void 0 ? { views: previousViews + 1 } : null,
         previousComments !== void 0 ? { comments: previousComments + 1 } : null)) %>">
-        <span class="arrow left">◀</span>Previous
+        <span class="arrow left">◀</span>Previous (<%= previousCount %>)
       </a>
     <% } %>
     <% if (images.length >= settings.perPage &&
@@ -119,7 +119,7 @@
         lastDate !== void 0 ? { before: lastDate - 1 } : null,
         lastViews !== void 0 ? { views: lastViews } : null,
         lastComments !== void 0 ? { comments: lastComments } : null)) %>">
-          Next<span class="arrow right">▶</span>
+          Next (<%= images.count - settings.perPage %>)<span class="arrow right">▶</span>
         </a>
     <% } %>
   </nav>
