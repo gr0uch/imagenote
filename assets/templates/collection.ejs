@@ -108,7 +108,8 @@
         previousDate !== void 0 ? { before: previousDate } : null,
         previousViews !== void 0 ? { views: previousViews + 1 } : null,
         previousComments !== void 0 ? { comments: previousComments + 1 } : null)) %>">
-        <span class="arrow left">◀</span>Previous (<%= previousCount %>)
+        <span class="arrow left">◀</span>
+        Previous (<%= numeral(previousCount).format('0,0') %>)
       </a>
     <% } %>
     <% if (images.length >= settings.perPage &&
@@ -119,7 +120,8 @@
         lastDate !== void 0 ? { before: lastDate - 1 } : null,
         lastViews !== void 0 ? { views: lastViews } : null,
         lastComments !== void 0 ? { comments: lastComments } : null)) %>">
-          Next (<%= images.count - settings.perPage %>)<span class="arrow right">▶</span>
+          Next (<%= numeral(images.count - settings.perPage).format('0,0') %>)
+          <span class="arrow right">▶</span>
         </a>
     <% } %>
   </nav>

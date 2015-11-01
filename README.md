@@ -10,7 +10,7 @@ $ createdb -U postgres imagenote
 $ cd imagenote; npm install && npm start
 ```
 
-Requires **Node.js 4+**, **PostgreSQL 9.4+**, **ImageMagick** and **GraphicsMagick**.
+Requires **Node.js 4.2+**, **PostgreSQL 9.4+**, **ImageMagick** and **GraphicsMagick**.
 
 
 ## License
