@@ -24,24 +24,24 @@
     "cssnext": "^1.8.4",
     "deep-equal": "^1.0.1",
     "ejs": "^2.3.4",
-    "fortune": "^1.4.3",
-    "fortune-postgres": "^1.1.3",
+    "fortune": "^1.4.17",
+    "fortune-postgres": "^1.1.5",
     "gm": "^1.21.1",
     "html-minifier": "^1.0.0",
     "image-size": "^0.3.5",
     "inflection": "^1.7.2",
-    "js-yaml": "^3.4.3",
-    "mathjs": "^2.4.1",
+    "js-yaml": "^3.4.4",
+    "mathjs": "^2.4.2",
     "moment": "^2.10.6",
     "normalize.css": "^3.0.3",
     "numeral": "^1.5.3",
     "uglifyify": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^1.8.0",
+    "eslint": "^1.10.1",
     "eslint-config-0x8890": "^1.0.0",
     "tap-dot": "^1.0.0",
-    "tapdance": "^3.2.0"
+    "tapdance": "^4.0.1"
   },
   "eslintConfig": {
     "extends": "0x8890",
