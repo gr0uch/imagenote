@@ -49,7 +49,7 @@
   position: relative;
   z-index: 100;
   float: right;
-  margin: -0.4em 0;
+  margin: -0.3em 0;
 }
 
 :--header .button span {

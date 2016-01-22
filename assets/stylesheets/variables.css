@@ -32,7 +32,7 @@
   --line-height: calc(1em * 8 / 5);
   --border-radius: calc(1em * 3 / 10);
   --card-padding: 4px;
-  --card-gap: calc(var(--line-height) * 7 / 4);
+  --card-gap: calc(var(--line-height) * 3 / 2);
   --page-gap: calc(var(--line-height) * 5 / 2);
   --speed-slow: 0.30s;
   --speed-fast: 0.15s;
