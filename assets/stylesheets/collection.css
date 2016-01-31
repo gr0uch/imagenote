@@ -37,7 +37,7 @@
 
 :--collection .card .tag:before {
   content: '#';
-  color: var(--color-light);
+  color: var(--color-alt);
 }
 
 :--collection .card .tag:after {
@@ -53,7 +53,6 @@
 :--collection .card label,
 :--collection .card .view-count {
   float: right;
-  color: var(--color-light);
 }
 
 :--collection .card label {
@@ -62,6 +61,7 @@
 
 :--collection .card label:before {
   content: '⁄';
+  color: var(--color-alt);
   margin: 0 0.6em;
 }
 
@@ -69,10 +69,9 @@
   display: block;
   width: 100%;
   height: auto;
-  color: var(--color-light);
   user-select: none;
   transition: opacity var(--speed-slow) ease;
-  opacity: 0.75;
+  opacity: 1;
 }
 
 :--collection .card:hover img,
@@ -105,18 +104,18 @@
 }
 
 :--collection .info {
-  background-color: var(--color-bg-header);
+  background: linear-gradient(to bottom, transparent, var(--color-medium));
   position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
   opacity: 0;
-  transition: opacity var(--speed-slow) ease, background-color var(--speed-slow) ease;
+  transition: opacity var(--speed-slow) ease, background var(--speed-slow) ease;
 }
 
 :--card-line {
   position: relative;
-  color: var(--color-alt);
+  color: var(--color-body);
   padding: 0 calc(var(--card-padding) * 2);
   margin: 0;
   font-size: calc(1em * 3 / 4);
@@ -131,16 +130,12 @@
   padding-bottom: calc(var(--card-padding) * 1);
 }
 
-:--card-line time {
-  color: var(--color-body);
-}
-
 :--card-line .popup {
   position: absolute;
   width: 20em;
   top: calc(var(--line-height) + 14px);
   right: var(--card-padding);
-  background-color: var(--color-dark);
+  background-color: var(--color-body);
   border-radius: var(--border-radius);
   box-shadow: 0 2px 0 var(--color-shade);
   z-index: 500;
@@ -158,7 +153,7 @@
   position: absolute;
   pointer-events: none;
   border-color: rgba(0, 0, 0, 0);
-  border-bottom-color: var(--color-dark);
+  border-bottom-color: var(--color-body);
   border-width: 7px;
   margin-left: -7px;
 }
@@ -168,8 +163,9 @@
 }
 
 :--card-line input[type="text"] {
-  color: var(--color-bright);
-  background-color: var(--color-border);
+  color: var(--color-dark);
+  background-color: #fff;
+  box-shadow: inset 0 1px 0 var(--color-shade);
   border-radius: var(--border-radius);
   border: none;
   font-size: inherit;
@@ -185,11 +181,11 @@
 }
 
 /* Vendor prefixes suck! */
-:--card-line input[type="text"]::-webkit-input-placeholder { opacity: 1; color: var(--color-light); }
-:--card-line input[type="text"]:-moz-placeholder { opacity: 1; color: var(--color-light); }
-:--card-line input[type="text"]::-moz-placeholder { opacity: 1; color: var(--color-light); }
-:--card-line input[type="text"]:-ms-input-placeholder { opacity: 1; color: var(--color-light); }
-:--card-line input[type="text"]:placeholder { opacity: 1; color: var(--color-light); }
+:--card-line input[type="text"]::-webkit-input-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]:-moz-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]::-moz-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]:-ms-input-placeholder { opacity: 1; color: var(--color-shadow); }
+:--card-line input[type="text"]:placeholder { opacity: 1; color: var(--color-shadow); }
 
 :--card-line input.edit:checked ~ label.edit,
 :--card-line input.comment:checked ~ label.comment {
@@ -198,7 +194,7 @@
 
 :--card-line input.edit:checked ~ label.edit:before,
 :--card-line input.comment:checked ~ label.comment:before {
-  color: var(--color-light);
+  color: var(--color-alt);
 }
 
 :--card-line input.edit:checked ~ .popup.edit,
@@ -213,6 +209,7 @@
 }
 
 :--collection .comments {
+  color: var(--color-dark);
   margin: -1px 0 calc(var(--card-padding) * 2);
   padding: 0;
   list-style-type: none;
@@ -220,7 +217,7 @@
 
 :--collection .comments li {
   padding: 9px 0 12px;
-  border-bottom: 1px var(--color-border) solid;
+  border-bottom: 1px var(--color-shade) solid;
 }
 
 :--collection .comments li:first-of-type {
@@ -228,7 +225,7 @@
 }
 
 :--collection .comments time {
-  color: var(--color-light);
+  color: var(--color-medium) !important;
 }
 
 :--collection .comments form {

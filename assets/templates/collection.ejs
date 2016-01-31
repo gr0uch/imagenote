@@ -66,7 +66,7 @@
                       <% if (isAdmin) { %>
                         <form method="post"
                           action="<%= `comments/${encodeURIComponent(comment.id)}/delete` %>">
-                          <button class="grey">×</button>
+                          <button class="delete">×</button>
                         </form>
                       <% } %>
                       <%= comment.text %>&nbsp;
