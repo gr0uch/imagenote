@@ -1,6 +1,13 @@
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 @custom-selector :--text-block p, ol, ul, pre, blockquote;
 
+/*
+Use `border-box` properly:
+https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+*/
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
 html, body {
   height: 100%;
 }
@@ -19,7 +26,7 @@ body[data-active] > header:not([data-active]) {
 }
 
 
-body[data-active] .card img {
+body[data-active] :--collection .card img {
   opacity: 0.25;
 }
 

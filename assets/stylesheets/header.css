@@ -38,7 +38,13 @@
 
 :--header h1 {
   float: left;
-  margin: 0.125em 1.4em 0 0;
+  margin: 0 1.4em 0 0;
+  color: var(--color-bright);
+}
+
+
+:--header .dropdown {
+  top: -0.125em;
 }
 
 :--header .ids {
@@ -49,7 +55,7 @@
   position: relative;
   z-index: 100;
   float: right;
-  margin: -0.3em 0;
+  margin: -0.35em 0;
 }
 
 :--header .button span {

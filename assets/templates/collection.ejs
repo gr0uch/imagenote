@@ -28,77 +28,79 @@
             </form>
           <% } %>
         </div>
-        <div class="top-line">
-          <input type="checkbox" id="<%= `edit-${counter}` %>" class="edit">
-          <label class="edit" for="<%= `edit-${counter}` %>" title="Edit">✎</label>
-          <input type="checkbox" id="<%= `comment-${counter}` %>" class="comment">
-          <label class="comment" for="<%= `comment-${counter}` %>" title="<%= image.comment && image.comment.length ? `${image.comment.length} comment${image.comment.length > 1 ? 's' : ''}` : `Comment` %>"><%= `★ ${image.comment ? image.comment.length : 0}` %></label>
-          <% counter++ %>
-          <span class="view-count">
-            <% var viewCount = numeral(image.viewCount).format('0,0') %>
-            <%- `<span title="${viewCount} view${image.viewCount !== 1 ? 's' : ''}">⎆ ${viewCount}</span>` %>
-          </span>
-          <time datetime="<%= moment(image.uploadDate).toISOString() %>">
-            <span title="<%= moment(image.uploadDate).format('MMMM Do, YYYY') %>">
-              <%= moment(image.uploadDate).fromNow() %>
+        <div class="info">
+          <div class="line">
+            <input type="checkbox" id="<%= `edit-${counter}` %>" class="edit">
+            <label class="edit" for="<%= `edit-${counter}` %>" title="Edit">✎</label>
+            <input type="checkbox" id="<%= `comment-${counter}` %>" class="comment">
+            <label class="comment" for="<%= `comment-${counter}` %>" title="<%= image.comment && image.comment.length ? `${image.comment.length} comment${image.comment.length > 1 ? 's' : ''}` : `Comment` %>"><%= `★ ${image.comment ? image.comment.length : 0}` %></label>
+            <% counter++ %>
+            <span class="view-count">
+              <% var viewCount = numeral(image.viewCount).format('0,0') %>
+              <%- `<span title="${viewCount} view${image.viewCount !== 1 ? 's' : ''}">⎆ ${viewCount}</span>` %>
             </span>
-          </time>
-          <div class="popup edit">
-            <form method="post" enctype="multipart/form-data"
-              action="<%= `/images/${encodeURIComponent(image.id)}/edit` %>">
-              <input type="text" name="about" value="<%= image.about.join(', ') %>"
-                placeholder="Comma-separated IDs...">
-              <input type="text" name="keywords" value="<%= image.keywords.join(', ') %>"
-                placeholder="Comma-separated tags...">
-              <input type="text" name="description" value="<%= image.description || '' %>"
-                placeholder="Description...">
-              <input type="hidden" name="id" value="<%= image.id %>">
-              <button>Edit</button>
-            </form>
+            <time datetime="<%= moment(image.uploadDate).toISOString() %>">
+              <span title="<%= moment(image.uploadDate).format('MMMM Do, YYYY') %>">
+                <%= moment(image.uploadDate).fromNow() %>
+              </span>
+            </time>
+            <div class="popup edit">
+              <form method="post" enctype="multipart/form-data"
+                action="<%= `/images/${encodeURIComponent(image.id)}/edit` %>">
+                <input type="text" name="about" value="<%= image.about.join(', ') %>"
+                  placeholder="Comma-separated IDs...">
+                <input type="text" name="keywords" value="<%= image.keywords.join(', ') %>"
+                  placeholder="Comma-separated tags...">
+                <input type="text" name="description" value="<%= image.description || '' %>"
+                  placeholder="Description...">
+                <input type="hidden" name="id" value="<%= image.id %>">
+                <button>Edit</button>
+              </form>
+            </div>
+            <div class="popup comment">
+              <% if (image.comment && image.comment.length) { %>
+                <ul class="comments">
+                  <% image.comment.forEach(id => { %>
+                    <% var comment = include.Comment.find(record => record.id === id) %>
+                    <li>
+                      <% if (isAdmin) { %>
+                        <form method="post"
+                          action="<%= `comments/${encodeURIComponent(comment.id)}/delete` %>">
+                          <button class="grey">×</button>
+                        </form>
+                      <% } %>
+                      <%= comment.text %>&nbsp;
+                      <time datetime="<%= moment(comment.dateCreated).toISOString() %>">
+                        <span title="<%= moment(comment.dateCreated).format('MMMM Do, YYYY') %>">
+                          <%= moment(comment.dateCreated).fromNow() %>
+                        </span>
+                      </time>
+                    </li>
+                  <% }) %>
+                </ul>
+              <% } %>
+              <form method="post" enctype="multipart/form-data" action="<%= `/comments` %>">
+                <input type="text" name="text" placeholder="Add comment...">
+                <input type="hidden" name="about" value="<%= image.id %>">
+                <button>Comment</button>
+              </form>
+            </div>
           </div>
-          <div class="popup comment">
-            <% if (image.comment && image.comment.length) { %>
-              <ul class="comments">
-                <% image.comment.forEach(id => { %>
-                  <% var comment = include.Comment.find(record => record.id === id) %>
-                  <li>
-                    <% if (isAdmin) { %>
-                      <form method="post"
-                        action="<%= `comments/${encodeURIComponent(comment.id)}/delete` %>">
-                        <button class="grey">×</button>
-                      </form>
-                    <% } %>
-                    <%= comment.text %>&nbsp;
-                    <time datetime="<%= moment(comment.dateCreated).toISOString() %>">
-                      <span title="<%= moment(comment.dateCreated).format('MMMM Do, YYYY') %>">
-                        <%= moment(comment.dateCreated).fromNow() %>
-                      </span>
-                    </time>
-                  </li>
-                <% }) %>
-              </ul>
-            <% } %>
-            <form method="post" enctype="multipart/form-data" action="<%= `/comments` %>">
-              <input type="text" name="text" placeholder="Add comment...">
-              <input type="hidden" name="about" value="<%= image.id %>">
-              <button>Comment</button>
-            </form>
-          </div>
+          <% if (image.keywords.length || image.about.length) { %>
+            <div class="line">
+              <% image.about.forEach(id => { %>
+                <a class="tag id" href="?<%= qs.stringify({ id }) %>">
+                  <%= id %>
+                </a>
+              <% }) %>
+              <% image.keywords.forEach(keyword => { %>
+                <a class="tag" href="?<%= qs.stringify({ tag: keyword }) %>">
+                  <%= keyword %>
+                </a>
+              <% }) %>
+            </div>
+          <% } %>
         </div>
-        <% if (image.keywords.length || image.about.length) { %>
-          <p class="tags">
-            <% image.about.forEach(id => { %>
-              <a class="tag id" href="?<%= qs.stringify({ id }) %>">
-                <%= id %>
-              </a>
-            <% }) %>
-            <% image.keywords.forEach(keyword => { %>
-              <a class="tag" href="?<%= qs.stringify({ tag: keyword }) %>">
-                <%= keyword %>
-              </a>
-            <% }) %>
-          </p>
-        <% } %>
       </div>
     <% }) %>
   </section>

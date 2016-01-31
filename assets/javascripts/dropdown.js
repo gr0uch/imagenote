@@ -3,13 +3,13 @@
 var close = require('./close')
 var body = document.body
 var checkboxLabels = document.querySelectorAll(
-  '.dropdown > label, .top-line > label')
+  '.dropdown > label, .info .line > label')
 var header =  document.querySelector('body > header')
-var editLabels =  document.querySelectorAll('.top-line label')
+var editLabels =  document.querySelectorAll('.info .line label')
 var checkboxes = document.querySelectorAll(
-  'body > header input[type="checkbox"], .top-line input[type="checkbox"]')
+  'body > header input[type="checkbox"], .info .line input[type="checkbox"]')
 var dropdowns = document.querySelectorAll(
-  '.dropdown, .top-line .popup')
+  '.dropdown, .info .line .popup')
 var focusInputs = document.querySelectorAll(
   '#filter-tag ~ form input[name="tag"], #filter-id ~ form input[name="id"]')
 var focusLabels = document.querySelectorAll(
@@ -23,11 +23,14 @@ Array.prototype.forEach.call(checkboxes, function (checkbox) {
     if (this.checked) {
       body.setAttribute(close.dataActive, 'true')
       close.unsetActiveCard()
-      if (this.parentNode.className === 'top-line')
-        this.parentNode.parentNode.setAttribute(close.dataActive, 'true')
+
+      if (this.parentNode.className === 'line')
+        this.parentNode.parentNode.parentNode.setAttribute(close.dataActive, 'true')
       if (this.parentNode.className === 'dropdown')
         header.setAttribute(close.dataActive, 'true')
       else header.removeAttribute(close.dataActive)
+
+      event.isHandled = true
     }
     else body.removeAttribute(close.dataActive)
 
@@ -35,22 +38,28 @@ Array.prototype.forEach.call(checkboxes, function (checkbox) {
     Array.prototype.forEach.call(checkboxes, function (checkbox) {
       if (checkbox !== current) checkbox.checked = false
     })
-
-    event.stopPropagation()
   })
 })
 
-// Prevent event propagation on labels and dropdowns.
+// Prevent closing on labels and dropdowns.
 Array.prototype.forEach.call(checkboxLabels, stop)
 Array.prototype.forEach.call(dropdowns, stop)
 
 // Mouse hover over dropdown.
 Array.prototype.forEach.call(checkboxLabels, function (element) {
+  var timer
+
   element.addEventListener('mouseover', function () {
     if (body.hasAttribute(close.dataActive) &&
       header.hasAttribute(close.dataActive) &&
       !element.parentNode.firstChild.checked && !element.className)
-      element.click()
+      timer = setTimeout(function () {
+        element.click()
+      }, 100)
+  })
+
+  element.addEventListener('mouseout', function () {
+    clearTimeout(timer)
   })
 })
 
@@ -83,6 +92,6 @@ window.addEventListener('keydown', function (event) {
 
 function stop (element) {
   element.addEventListener('click', function (event) {
-    event.stopPropagation()
+    event.isHandled = true
   })
 }

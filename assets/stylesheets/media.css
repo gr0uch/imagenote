@@ -56,6 +56,13 @@
     column-count: 1;
   }
 
+  :--collection .info {
+    position: relative;
+    opacity: 1;
+    background-color: var(--color-input);
+    padding-top: calc(var(--card-padding) - 2px);
+  }
+
   :--upload form {
     max-width: 100%;
   }

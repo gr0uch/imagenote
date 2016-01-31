@@ -1,4 +1,6 @@
 @custom-selector :--collection main > section.collection;
+@custom-selector :--card-info main > section.collection .card .info;
+@custom-selector :--card-line main > section.collection .card .info .line;
 
 :--collection {
   column-count: 5;
@@ -9,26 +11,13 @@
 }
 
 :--collection .card {
-  background-color: var(--color-input);
   display: inline-block;
   margin-bottom: calc(var(--card-gap) - 0.25em);
-  padding: 0 0 calc(var(--card-padding) * 2);
+  border: var(--card-padding) var(--color-input) solid;
   width: 100%;
   box-shadow: 0 1px 0 var(--color-border);
   position: relative;
   border-radius: var(--border-radius);
-}
-
-:--collection .card p time {
-  color: var(--color-body);
-}
-
-:--collection .card p {
-  color: var(--color-alt);
-  padding: 0 calc(var(--card-padding) * 2);
-  margin: 0;
-  font-size: calc(1em * 3 / 4);
-  line-height: var(--line-height);
 }
 
 :--collection .card p:after {
@@ -83,11 +72,13 @@
   color: var(--color-light);
   user-select: none;
   transition: opacity var(--speed-slow) ease;
-  padding: var(--card-padding);
+  opacity: 0.75;
 }
 
-:--collection .card[data-active] img {
-  opacity: 1;
+:--collection .card:hover img,
+:--collection .card[data-active] img,
+:--collection .card[data-active] .info {
+  opacity: 1 !important;
 }
 
 :--collection .card .overlay img,
@@ -108,22 +99,46 @@
   transition: opacity var(--speed-fast) ease;
 }
 
+:--collection .card:hover .info,
 :--collection .card:hover .overlay form {
   opacity: 1;
 }
 
-:--collection .card .top-line {
+:--collection .info {
+  background-color: var(--color-bg-header);
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity var(--speed-slow) ease, background-color var(--speed-slow) ease;
+}
+
+:--card-line {
   position: relative;
-  padding: 1px calc(var(--card-padding) * 2) 0;
   color: var(--color-alt);
+  padding: 0 calc(var(--card-padding) * 2);
+  margin: 0;
   font-size: calc(1em * 3 / 4);
   line-height: var(--line-height);
 }
 
-:--collection .card .top-line .popup {
+:--card-line:first-of-type {
+  padding-top: calc(var(--card-padding) * 1);
+}
+
+:--card-line:last-of-type {
+  padding-bottom: calc(var(--card-padding) * 1);
+}
+
+:--card-line time {
+  color: var(--color-body);
+}
+
+:--card-line .popup {
   position: absolute;
   width: 20em;
-  top: calc(var(--line-height) + 9px);
+  top: calc(var(--line-height) + 14px);
   right: var(--card-padding);
   background-color: var(--color-dark);
   border-radius: var(--border-radius);
@@ -133,7 +148,7 @@
   padding: calc(var(--card-padding) * 2);
 }
 
-:--collection .card .top-line .popup:after {
+:--card-line .popup:after {
   bottom: 100%;
   right: 3px;
   border: solid transparent;
@@ -148,11 +163,11 @@
   margin-left: -7px;
 }
 
-:--collection .card .top-line .popup.comment:after {
+:--card-line .popup.comment:after {
   right: 33px;
 }
 
-:--collection .card .top-line input[type="text"] {
+:--card-line input[type="text"] {
   color: var(--color-bright);
   background-color: var(--color-border);
   border-radius: var(--border-radius);
@@ -165,33 +180,33 @@
   height: calc(var(--line-height) + 18px);
 }
 
-:--collection .card .top-line input[type="text"]:focus {
+:--card-line input[type="text"]:focus {
   outline: none;
 }
 
 /* Vendor prefixes suck! */
-:--collection .card .top-line input[type="text"]::-webkit-input-placeholder { opacity: 1; color: var(--color-light); }
-:--collection .card .top-line input[type="text"]:-moz-placeholder { opacity: 1; color: var(--color-light); }
-:--collection .card .top-line input[type="text"]::-moz-placeholder { opacity: 1; color: var(--color-light); }
-:--collection .card .top-line input[type="text"]:-ms-input-placeholder { opacity: 1; color: var(--color-light); }
-:--collection .card .top-line input[type="text"]:placeholder { opacity: 1; color: var(--color-light); }
+:--card-line input[type="text"]::-webkit-input-placeholder { opacity: 1; color: var(--color-light); }
+:--card-line input[type="text"]:-moz-placeholder { opacity: 1; color: var(--color-light); }
+:--card-line input[type="text"]::-moz-placeholder { opacity: 1; color: var(--color-light); }
+:--card-line input[type="text"]:-ms-input-placeholder { opacity: 1; color: var(--color-light); }
+:--card-line input[type="text"]:placeholder { opacity: 1; color: var(--color-light); }
 
-:--collection .card .top-line input.edit:checked ~ label.edit,
-:--collection .card .top-line input.comment:checked ~ label.comment {
+:--card-line input.edit:checked ~ label.edit,
+:--card-line input.comment:checked ~ label.comment {
   color: var(--color-bright);
 }
 
-:--collection .card .top-line input.edit:checked ~ label.edit:before,
-:--collection .card .top-line input.comment:checked ~ label.comment:before {
+:--card-line input.edit:checked ~ label.edit:before,
+:--card-line input.comment:checked ~ label.comment:before {
   color: var(--color-light);
 }
 
-:--collection .card .top-line input.edit:checked ~ .popup.edit,
-:--collection .card .top-line input.comment:checked ~ .popup.comment {
+:--card-line input.edit:checked ~ .popup.edit,
+:--card-line input.comment:checked ~ .popup.comment {
   display: block;
 }
 
-:--collection .card .top-line button {
+:--card-line button {
   padding: 9px var(--card-padding) 7px;
   width: 100%;
   font-weight: bold;

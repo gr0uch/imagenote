@@ -21,11 +21,11 @@
     "chalk": "^1.1.1",
     "cookie": "^0.2.3",
     "crc": "^3.4.0",
-    "cssnext": "^1.8.4",
+    "cssnano": "^3.4.0",
     "deep-equal": "^1.0.1",
-    "ejs": "^2.3.4",
-    "fortune": "^1.11.0",
-    "fortune-postgres": "^1.2.4",
+    "ejs": "^2.4.1",
+    "fortune": "^2.1.2",
+    "fortune-postgres": "^1.4.0",
     "gm": "^1.21.1",
     "html-minifier": "^1.1.1",
     "image-size": "^0.4.0",
@@ -35,13 +35,16 @@
     "moment": "^2.11.1",
     "normalize.css": "^3.0.3",
     "numeral": "^1.5.3",
+    "postcss": "^5.0.14",
+    "postcss-cssnext": "^2.4.0",
+    "postcss-import": "^8.0.2",
     "uglifyify": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^1.10.3",
     "eslint-config-0x8890": "^1.0.1",
     "tap-dot": "^1.0.1",
-    "tapdance": "^4.0.1"
+    "tapdance": "^4.1.1"
   },
   "eslintConfig": {
     "extends": "0x8890",

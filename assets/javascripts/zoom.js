@@ -16,7 +16,7 @@ Array.prototype.forEach.call(imageContainers, function (a, i) {
     body.setAttribute(c.dataActive, 'true')
     zoom.setAttribute(c.dataActive, 'true')
     event.preventDefault()
-    event.stopPropagation()
+    event.isHandled = true
   })
 })
 
@@ -39,7 +39,8 @@ window.addEventListener('keydown', function (event) {
 
 window.addEventListener('click', close)
 
-function close () {
+function close (event) {
+  if (event.isHandled) return null
   zoom.removeAttribute(c.dataActive)
 }
 
