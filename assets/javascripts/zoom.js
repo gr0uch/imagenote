@@ -22,7 +22,10 @@ Array.prototype.forEach.call(imageContainers, function (a, i) {
 
 window.addEventListener('keydown', function (event) {
   // Escape key.
-  if (event.keyCode === 27) close()
+  if (event.keyCode === 27) {
+    c()
+    close()
+  }
 
   // Arrow left.
   if (event.keyCode === 37) {
@@ -40,7 +43,7 @@ window.addEventListener('keydown', function (event) {
 window.addEventListener('click', close)
 
 function close (event) {
-  if (event.isHandled) return null
+  if (event && event.isHandled) return null
   zoom.removeAttribute(c.dataActive)
 }
 

@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <% if (request.error) title = request.error.name %>
     <title><%= (title ? title + ' | ' : '') + settings.name %></title>
-    <link rel="stylesheet" href="<%= root %>stylesheet">
-    <link rel="icon" type="image/x-icon" href="<%= root %>favicon.ico">
+    <link rel="stylesheet" href="<%= `${root}stylesheet` %>">
+    <link rel="icon" type="image/x-icon" href="<%= `${root}favicon.ico` %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <% if (!Object.keys(flags).length && !request.error) { %>
       <meta name="description" content="<%= settings.description %>">
@@ -39,6 +39,6 @@
         <%- this.error({ error: request.error }) %>
       <% } %>
     </main>
-    <script defer src="<%= root %>script"></script>
+    <script defer src="<%= `${root}script` %>"></script>
   </body>
 </html>

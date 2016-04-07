@@ -89,12 +89,12 @@
           <% if (image.keywords.length || image.about.length) { %>
             <div class="line">
               <% image.about.forEach(id => { %>
-                <a class="tag id" href="?<%= qs.stringify({ id }) %>">
+                <a class="tag id" href="<%= '?' + qs.stringify({ id }) %>">
                   <%= id %>
                 </a>
               <% }) %>
               <% image.keywords.forEach(keyword => { %>
-                <a class="tag" href="?<%= qs.stringify({ tag: keyword }) %>">
+                <a class="tag" href="<%= '?' + qs.stringify({ tag: keyword }) %>">
                   <%= keyword %>
                 </a>
               <% }) %>
@@ -106,7 +106,7 @@
   </section>
   <nav>
     <% if (previousCount) { %>
-      <a class="button dark" href="?<%= qs.stringify(Object.assign({}, query,
+      <a class="button dark" href="<%= '?' + qs.stringify(Object.assign({}, query,
         previousDate !== void 0 ? { before: previousDate } : null,
         previousViews !== void 0 ? { views: previousViews + 1 } : null,
         previousComments !== void 0 ? { comments: previousComments + 1 } : null)) %>">
@@ -118,7 +118,7 @@
       (lastDate !== void 0 ? query.before !== lastDate : true) &&
       (lastViews !== void 0 ? query.views !== lastViews : true) &&
       (lastComments !== void 0 ? query.comments !== lastComments : true)) { %>
-      <a class="button dark" href="?<%= qs.stringify(Object.assign({}, query,
+      <a class="button dark" href="<%= '?' + qs.stringify(Object.assign({}, query,
         lastDate !== void 0 ? { before: lastDate - 1 } : null,
         lastViews !== void 0 ? { views: lastViews } : null,
         lastComments !== void 0 ? { comments: lastComments } : null)) %>">

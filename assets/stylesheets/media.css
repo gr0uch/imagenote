@@ -1,11 +1,3 @@
-@media screen and (max-width: 96em) {
-
-  :--collection {
-    column-count: 4;
-  }
-
-}
-
 @media screen and (max-width: 72em) {
 
   :--collection {
